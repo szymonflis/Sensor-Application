@@ -13,9 +13,16 @@
         android:theme="@style/Theme.SensorApplication"
         tools:targetApi="31">
         <activity
-            android:name=".HubActivity"
-            android:label="Sensor Hub"
+            android:name=".SensorListActivity"
             android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".HubActivity"
+            android:exported="false"
+            android:label="Sensor Hub">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
