@@ -13,6 +13,13 @@
         android:theme="@style/Theme.SensorApplication"
         tools:targetApi="31">
         <activity
+            android:name=".InternalSensors"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SensorListActivity"
             android:exported="false">
             <meta-data
