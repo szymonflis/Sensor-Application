@@ -1,6 +1,11 @@
+
+
 plugins {
     id 'com.android.application'
+//    id 'com.github.ben-manes.versions'
+
 }
+
 
 android {
     namespace 'com.example.sensorapplication'
@@ -15,6 +20,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+
 
     buildTypes {
         release {
@@ -37,3 +44,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 }
+
