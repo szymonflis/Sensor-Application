@@ -2,23 +2,19 @@ package com.example.sensorapplication;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintSet;
 
-import android.content.Context;
 import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StatFs;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import java.io.File;
-import java.util.List;
 
 public class HubActivity extends AppCompatActivity {
     @Override
@@ -31,11 +27,32 @@ public class HubActivity extends AppCompatActivity {
         final String phoneMakeAndModel = "Model & Brand: " + Build.MODEL + " " + Build.BRAND;
         TextView modelAndMake = findViewById(R.id.textView3);
         modelAndMake.setText(phoneMakeAndModel);
-        float totalStorage = TotalAvailableStorage();
-        float storageLeft = AvailableRemainingStorage();
+//      Making calls to functions below to calculate storage
+        float totalStorage = StorageHelper.TotalAvailableStorage();
+        float storageAvailable = StorageHelper.AvailableRemainingStorage();
+//      I am calculating the storage used as a percentage and using this as a plot on the Bar
+//      There is an issue because this calculates storage available to the user
+//      The emulated device has 8GB storage but 1.8GB is used by the System so only 6.2GB
+//      Is available to the user and this is what i calculate and plot against.
+        int storageUsed = (int) (((totalStorage - storageAvailable) / storageAvailable) * 100);
 
-        String formattedStorage = FormatStorageValues(storageLeft);
-        System.out.println(formattedStorage);
+//      I want to create a progress bar type object for displaying the storage as a bar to see how close to being full it is
+
+        final ProgressBar storageBar = findViewById(R.id.progressBar);
+        final TextView storageLabel = findViewById(R.id.textView6);
+        storageLabel.setText(StorageHelper.FormatStorageValues(totalStorage));
+        storageBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
+//      Since this is a percentage calculated i can plot it out of 100
+        storageBar.setMax(100);
+        storageBar.setProgress(storageUsed);
+
+//       Text underneath the progress bar
+
+        final TextView progressBarText = findViewById(R.id.textView5);
+        progressBarText.setText("^ Available storage used: " + storageUsed + "% ^");
+
+
+
 
 //      Button which gives a user the ability to view all sensors on phone
         final Button sensorsButton = findViewById(R.id.button);
@@ -51,51 +68,17 @@ public class HubActivity extends AppCompatActivity {
         batterySensors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(HubActivity.this, InternalSensors.class));
+            }
+        });
+
+        final ImageButton motionSensor = findViewById(R.id.imageButton6);
+        motionSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HubActivity.this, MotionSensors.class));
             }
         });
     }
 
-// This function will calculate the amount of blocks on the phone and their size multiplying to find total storage in bits
-    public float TotalAvailableStorage() {
-        File phonePath = Environment.getDataDirectory();
-        StatFs stats = new StatFs(phonePath.getPath());
-        long blockSize = stats.getBlockSizeLong();
-        long bitAmount = stats.getBlockCountLong();
-        return bitAmount * blockSize;
-    }
-
-// This function will calculate the amount of remaining blocks on the phone and their size multiplying to find total storage in bits
-
-    public float AvailableRemainingStorage() {
-        File phonePath = Environment.getDataDirectory();
-        StatFs stats = new StatFs(phonePath.getPath());
-        long blockSize = stats.getBlockSizeLong();
-        long availableBlocks = stats.getAvailableBlocksLong();
-        return availableBlocks * blockSize;
-    }
-
-
-//This formats the huge numbers retrieved previously into a Kb, Mb, Gb format
-    public String FormatStorageValues(float storageVal) {
-        StringBuilder storageString = new StringBuilder();
-        String label;
-        if (storageVal >= 1024) {
-            storageVal = storageVal / 1024;
-                label = "KB";
-            if (storageVal >= 1024) {
-                storageVal = storageVal / 1024;
-                label = "MB";
-                if (storageVal >= 1024) {
-                    storageVal = storageVal / 1024;
-                    label = "GB";
-                }
-            }
-        }
-        else{
-            label = "";
-        }
-        storageString.append(storageVal);
-        storageString.append(label);
-        return storageString.toString();
-    }
 }

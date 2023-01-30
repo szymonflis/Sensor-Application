@@ -1,5 +1,6 @@
 package com.example.sensorapplication;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -12,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +24,11 @@ public class SensorListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sensor_list);
         final Spinner sensorsSpinner = findViewById(R.id.spinner);
         final TextView sensorInfo = findViewById(R.id.textView4);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         StringBuilder stringBuilder = new StringBuilder();
         // Initialising the sensor manager and assigning it the sensor service from the emulated phone
         SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
