@@ -6,7 +6,7 @@ import android.os.StatFs;
 import java.io.File;
 import java.text.DecimalFormat;
 
-public class StorageHelper {
+public class Helper {
 
     //This formats the huge numbers retrieved previously into a Kb, Mb, Gb format
     public static String FormatStorageValues(float storageVal){
@@ -52,7 +52,4 @@ public class StorageHelper {
         long availableBlocks = stats.getAvailableBlocksLong();
         return availableBlocks * blockSize;
     }
-
-
-
 }
