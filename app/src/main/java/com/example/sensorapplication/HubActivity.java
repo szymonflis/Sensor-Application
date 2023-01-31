@@ -2,12 +2,10 @@ package com.example.sensorapplication;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -28,19 +26,18 @@ public class HubActivity extends AppCompatActivity {
         TextView modelAndMake = findViewById(R.id.textView3);
         modelAndMake.setText(phoneMakeAndModel);
 //      Making calls to functions below to calculate storage
-        float totalStorage = StorageHelper.TotalAvailableStorage();
-        float storageAvailable = StorageHelper.AvailableRemainingStorage();
-//      I am calculating the storage used as a percentage and using this as a plot on the Bar
-//      There is an issue because this calculates storage available to the user
-//      The emulated device has 8GB storage but 1.8GB is used by the System so only 6.2GB
-//      Is available to the user and this is what i calculate and plot against.
+        float totalStorage = Helper.TotalAvailableStorage();
+        float storageAvailable = Helper.AvailableRemainingStorage();
+
+        /*      I am calculating the storage used as a percentage and using this as a plot on the Bar
+        The emulated device has 8GB storage but 1.8GB is used by the System so only 6.2GB
+*/
         int storageUsed = (int) (((totalStorage - storageAvailable) / storageAvailable) * 100);
 
 //      I want to create a progress bar type object for displaying the storage as a bar to see how close to being full it is
-
         final ProgressBar storageBar = findViewById(R.id.progressBar);
         final TextView storageLabel = findViewById(R.id.textView6);
-        storageLabel.setText(StorageHelper.FormatStorageValues(totalStorage));
+        storageLabel.setText(Helper.FormatStorageValues(totalStorage));
         storageBar.setProgressTintList(ColorStateList.valueOf(Color.RED));
 //      Since this is a percentage calculated i can plot it out of 100
         storageBar.setMax(100);
