@@ -3,4 +3,12 @@
     <string name="appTitle">System Monitoring Application</string>
     <string name="sensorButton">Show All Sensors Available</string>
     <string name="sensorSpinner">Sensors</string>
+    <string name="samplingRate">Sampling Rate Choices</string>
+    <string name="Accelerometer">Accelerometer Readings:</string>
+    <string name="Gyroscope">Gyroscope Readings:</string>
+    <string name="radFast">Fast</string>
+    <string name="radNormal">Normal</string>
+    <string name="radGame">Game</string>
+    <string name="radUI">UI</string>
+
 </resources>

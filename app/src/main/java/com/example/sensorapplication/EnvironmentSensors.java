@@ -11,24 +11,26 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class EnvironmentSensors extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
-    private Sensor temperature;
-    private Sensor humidity;
-    private Sensor pressure;
-    private Sensor light;
-    private TextView temp;
-    private TextView humid;
-    private TextView pressureText;
-    private TextView lightText;
+    private Sensor temperature, humidity, pressure, light;
+    private TextView temp, humid, pressureText, lightText;
+    boolean tempSensPresent, humidityPresent, pressurePresent, lightPresent;
+    private RadioGroup samplerates;
+    private int chosenRate = 3;
 
-    boolean tempSensPresent;
-    boolean humidityPresent;
-    boolean pressurePresent;
-    boolean lightPresent;
+
+
 
 
 
@@ -40,6 +42,10 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
         humid = findViewById(R.id.textView8);
         pressureText = findViewById(R.id.textView9);
         lightText = findViewById(R.id.textView10);
+        samplerates = (RadioGroup) findViewById(R.id.radioGroup);
+
+
+//      Get the sensor manager to check if sensors are present before assigning them
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         if(sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) != null){
@@ -74,6 +80,27 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
             lightText.setText("Pressure Unavailable");
             lightPresent = false;
         }
+
+        samplerates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int id = samplerates.getCheckedRadioButtonId();
+                switch(id){
+                    case R.id.radioButton:
+                        chosenRate = SensorManager.SENSOR_DELAY_NORMAL;
+                        break;
+                    case R.id.radioButton3:
+                        chosenRate = SensorManager.SENSOR_DELAY_FASTEST;
+                        break;
+                    case R.id.radioButton4:
+                        chosenRate = SensorManager.SENSOR_DELAY_GAME;
+                        break;
+                    case R.id.radioButton5:
+                        chosenRate = SensorManager.SENSOR_DELAY_UI;
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -105,16 +132,16 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
 //      Registering every listener for every environmental sensor
         super.onResume();
         if(tempSensPresent) {
-            sensorManager.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, temperature, chosenRate);
         }
         if(humidityPresent){
-            sensorManager.registerListener(this, humidity, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, humidity, chosenRate);
         }
         if(pressurePresent){
-            sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, pressure, chosenRate);
         }
         if(lightPresent){
-            sensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorManager.registerListener(this, light, chosenRate);
         }
     }
 
