@@ -45,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627"
+        app:layout_constraintVertical_bias="0.558"
         app:srcCompat="@mipmap/battery_image" />
 
     <ProgressBar
@@ -96,7 +96,20 @@
         app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627"
+        app:layout_constraintVertical_bias="0.558"
         app:srcCompat="@mipmap/motion_sensor_image" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="167dp"
+        android:layout_height="167dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907"
+        app:srcCompat="@mipmap/env_sensor_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

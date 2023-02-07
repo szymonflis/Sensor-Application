@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -76,6 +77,16 @@ public class HubActivity extends AppCompatActivity {
                 startActivity(new Intent(HubActivity.this, MotionSensors.class));
             }
         });
+
+        final ImageButton envSensor = findViewById(R.id.imageButton2);
+        envSensor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HubActivity.this, EnvironmentSensors.class));
+            }
+        });
+
+
     }
 
 }
