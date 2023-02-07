@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,10 +13,18 @@
         android:theme="@style/Theme.SensorApplication"
         tools:targetApi="31">
         <activity
+            android:name=".EnvironmentSensors"
+            android:exported="false"
+            android:label="Environmental Sensor Hub">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MotionSensors"
             android:exported="false"
             android:label="Motion Sensor Hub">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -26,18 +33,15 @@
             android:name=".InternalSensors"
             android:exported="false"
             android:label="Internal Sensor Hub">
-
             >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value=""
-                />
-
+                android:value="" />
         </activity>
         <activity
             android:name=".SensorListActivity"
-            android:label="Sensor List"
-            android:exported="false">
+            android:exported="false"
+            android:label="Sensor List">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
