@@ -22,6 +22,7 @@ public class HubActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hub);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setLogo(R.mipmap.ic_launcher_round);
+
 //      Assigning model and brand of the emulated phone to a variable then setting to textview
         final String phoneMakeAndModel = "Model & Brand: " + Build.MODEL + " " + Build.BRAND;
         TextView modelAndMake = findViewById(R.id.textView3);
@@ -30,7 +31,7 @@ public class HubActivity extends AppCompatActivity {
         float totalStorage = Helper.TotalAvailableStorage();
         float storageAvailable = Helper.AvailableRemainingStorage();
 
-        /*      I am calculating the storage used as a percentage and using this as a plot on the Bar
+/*      I am calculating the storage used as a percentage and using this as a plot on the Bar
         The emulated device has 8GB storage but 1.8GB is used by the System so only 6.2GB
 */
         int storageUsed = (int) (((totalStorage - storageAvailable) / storageAvailable) * 100);
@@ -45,7 +46,6 @@ public class HubActivity extends AppCompatActivity {
         storageBar.setProgress(storageUsed);
 
 //       Text underneath the progress bar
-
         final TextView progressBarText = findViewById(R.id.textView5);
         progressBarText.setText("^ Available storage used: " + storageUsed + "% ^");
 
@@ -83,6 +83,14 @@ public class HubActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HubActivity.this, EnvironmentSensors.class));
+            }
+        });
+
+        final ImageButton userGuide = findViewById(R.id.imageButton4);
+        userGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HubActivity.this, UserGuide.class));
             }
         });
 
