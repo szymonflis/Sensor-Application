@@ -10,5 +10,19 @@
     <string name="radNormal">Normal</string>
     <string name="radGame">Game</string>
     <string name="radUI">UI</string>
+    <string name="fahrenheit">°F</string>
+    <string name="Celsius">°C</string>0
+    <string name="Guide">
+
+            \u25CF The Splash Screen of the application shows the Version Number and Release \n \n
+            \u25CF The Main Hub shows the Model and Brand of the phone  \n \n
+            \u25CF There is an option to view all available sensors on the phone and their details \n \n
+            \u25CF The Bar below the button to view all sensors calculates the remaining available storage on the phone \n \n
+            \u25CF The Top Left Icon takes the user to a view of the Internal battery sensors showing details like battery health, percentage, voltage etc... \n\n
+            \u25CF The bottom left icon takes the user to all environmental sensors displaying information around the phone like pressure and light \n\n
+            \u25CF The top right icon direct the user to motion sensors which track the built in accelerometer and gyroscope as the phone changes physical position \n\n
+            \u25CF The user is given the option to change the sampling rate from the built in rates into the android device \n \n
+
+    </string>
 
 </resources>

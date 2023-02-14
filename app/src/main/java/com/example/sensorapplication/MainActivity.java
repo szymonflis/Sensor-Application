@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.hide();
         final TextView versionCodeField = findViewById(R.id.textView);
         final TextView versionNameField = findViewById(R.id.textView2);
-        versionCodeField.setText("Version Code: " + String.valueOf(versionCode));
+        versionCodeField.setText("Version Code: " + versionCode);
         versionNameField.setText("Version Name: " + versionName);
 
 //For the splash screen appearing then disappearing i'm using a thread which opens a screen then sleeps for

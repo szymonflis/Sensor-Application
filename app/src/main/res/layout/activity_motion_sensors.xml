@@ -5,16 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MotionSensors"
-    android:background="@drawable/main_background"><![CDATA[
-    >
-
-
-
-
-
-
-    ]]>
-
+    android:background="@drawable/main_background">
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"

@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class EnvironmentSensors extends AppCompatActivity implements SensorEventListener {
@@ -26,13 +27,9 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
     private Sensor temperature, humidity, pressure, light;
     private TextView temp, humid, pressureText, lightText;
     boolean tempSensPresent, humidityPresent, pressurePresent, lightPresent;
-    private RadioGroup samplerates;
+    boolean fahrenheit = false;
+    private RadioGroup samplerates, unitChange;
     private int chosenRate = 3;
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +40,7 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
         pressureText = findViewById(R.id.textView9);
         lightText = findViewById(R.id.textView10);
         samplerates = (RadioGroup) findViewById(R.id.radioGroup);
+        unitChange = (RadioGroup) findViewById(R.id.radioGroup2);
 
 
 //      Get the sensor manager to check if sensors are present before assigning them
@@ -101,14 +99,35 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
                 }
             }
         });
+
+        unitChange.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int id = unitChange.getCheckedRadioButtonId();
+                switch(id){
+                    case R.id.radioButton12:
+                        fahrenheit = false;
+                        break;
+                    case R.id.radioButton10:
+                        fahrenheit = true;
+                        break;
+
+                }
+            }
+        });
     }
 
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 //      Since there are multiple sensor registered i need to differentiate which one is changing and set text accordingly
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setMaximumFractionDigits(2);
         Sensor sensor = sensorEvent.sensor;
         if (sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            temp.setText("Temperature = " + sensorEvent.values[0] + " °C");
+            if(fahrenheit){
+                temp.setText("Temperature = " + df.format((sensorEvent.values[0] * 1.8 + 32)) + " °F");
+            }
+            else{temp.setText("Temperature = " + sensorEvent.values[0] + " °C");}
         }
         else if(sensor.getType() == Sensor.TYPE_RELATIVE_HUMIDITY){
             humid.setText("Humidity = " + sensorEvent.values[0] + '%');
@@ -162,5 +181,7 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
             sensorManager.unregisterListener(this);
         }
     }
+
+
 
 }

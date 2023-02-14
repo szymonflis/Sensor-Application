@@ -3,8 +3,17 @@ package com.example.sensorapplication;
 import android.os.Environment;
 import android.os.StatFs;
 
+import com.opencsv.CSVWriter;
+
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
+import java.time.Instant;
 
 public class Helper {
 
@@ -51,5 +60,25 @@ public class Helper {
         long blockSize = stats.getBlockSizeLong();
         long availableBlocks = stats.getAvailableBlocksLong();
         return availableBlocks * blockSize;
+    }
+
+    public static void WriteToFile(String writable){
+        File path = Environment.getDataDirectory();
+        FileWriter outputFile = null;
+        try {
+            outputFile = new FileWriter(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        CSVWriter writer = new CSVWriter(outputFile);
+        Instant instant = Instant.now();
+
+        String[] headers =  {"Time", "Sensor", "Values"};
+        writer.writeNext(headers);
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
