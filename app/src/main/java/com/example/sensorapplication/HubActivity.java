@@ -2,6 +2,7 @@ package com.example.sensorapplication;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -93,8 +94,6 @@ public class HubActivity extends AppCompatActivity {
                 startActivity(new Intent(HubActivity.this, UserGuide.class));
             }
         });
-
-
     }
-
 }
+

@@ -13,10 +13,17 @@
         android:theme="@style/Theme.SensorApplication"
         tools:targetApi="31">
         <activity
+            android:name=".LogDisplay"
+            android:exported="false"
+            android:label="Motion Sensor Logs">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserGuide"
             android:exported="false"
             android:label="User Guide Screen">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -1,25 +1,15 @@
 package com.example.sensorapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 public class EnvironmentSensors extends AppCompatActivity implements SensorEventListener {
 

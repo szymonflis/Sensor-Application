@@ -14,8 +14,12 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.text.DecimalFormat;
 import java.time.Instant;
+import java.util.ArrayList;
 
 public class Helper {
+    public static ArrayList<String> logs = new ArrayList<>();
+    private static StringBuilder stringBuilder = new StringBuilder();
+
 
     //This formats the huge numbers retrieved previously into a Kb, Mb, Gb format
     public static String FormatStorageValues(float storageVal){
@@ -62,23 +66,13 @@ public class Helper {
         return availableBlocks * blockSize;
     }
 
-    public static void WriteToFile(String writable){
-        File path = Environment.getDataDirectory();
-        FileWriter outputFile = null;
-        try {
-            outputFile = new FileWriter(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        CSVWriter writer = new CSVWriter(outputFile);
-        Instant instant = Instant.now();
-
-        String[] headers =  {"Time", "Sensor", "Values"};
-        writer.writeNext(headers);
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void BuildLogs(Instant time, String writable){
+//      I'm going to build a string which contains the time of the sensor change and the values then store in an array
+        stringBuilder.append(time);
+        stringBuilder.append(writable);
+        logs.add(stringBuilder.toString());
+        if (logs.size() > 10){
+            logs.clear();
         }
     }
 }
