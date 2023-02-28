@@ -15,8 +15,8 @@ android {
         applicationId "com.example.sensorapplication"
         minSdk 26
         targetSdk 32
-        versionCode 5
-        versionName "5.3"
+        versionCode 7
+        versionName "7.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

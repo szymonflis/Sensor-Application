@@ -37,7 +37,7 @@ public class SensorListActivity extends AppCompatActivity {
         // Call my method to get all of the names of the sensors into a list
         ArrayList<String> sensors = getSensorNameList(sensorList);
         // Create an array adapter which will be able to set the content of the spinner through java
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,sensors);arrayAdapter.setDropDownViewResource(com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,sensors);
         arrayAdapter.setDropDownViewResource(com.google.android.material.R.layout.support_simple_spinner_dropdown_item);
         sensorsSpinner.setAdapter(arrayAdapter);
 

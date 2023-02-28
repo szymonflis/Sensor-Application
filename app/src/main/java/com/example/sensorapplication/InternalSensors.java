@@ -10,7 +10,6 @@ import android.os.BatteryManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 public class InternalSensors extends AppCompatActivity {
 
@@ -34,8 +33,8 @@ public class InternalSensors extends AppCompatActivity {
 //          Calling the function to set health and parsing the value in one line
             BatteryHealthSet((intent.getIntExtra(BatteryManager.EXTRA_HEALTH, 0)));
             BatteryChargingSet(intent);
-            batteryLevel.setText((intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)) + "%");
-            batteryTemp.setText("Battery Temperature: " + temperature);
+            batteryLevel.setText((intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)) + "%" + "\n" + "Battery");
+            batteryTemp.setText("Battery Temperature: " + temperature + "°C");
             batteryVolt.setText("Voltage: " + voltage + "v");
         }
     };

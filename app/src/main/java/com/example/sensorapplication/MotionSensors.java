@@ -6,14 +6,18 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -26,9 +30,11 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
     private TextView accelX, accelY, accelZ, gyroX, gyroY, gyroZ;
     private Sensor accelerometer, gyroscope;
     private SensorManager sensorManager;
-    private boolean accelPresent, gyroPresent;
+    private boolean accelPresent, gyroPresent, recording;
     private RadioGroup samplerates;
     private int chosenRate = 3;
+    private Button viewLogs;
+    private Switch recordLogs;
 
 
 
@@ -42,8 +48,8 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
         gyroX = findViewById(R.id.textView17);
         gyroY = findViewById(R.id.textView18);
         gyroZ = findViewById(R.id.textView19);
-
-
+        viewLogs = findViewById(R.id.button2);
+        recordLogs = (Switch) findViewById(R.id.switch1);
 
 //      Identify radio group to see which sampling rate is selected
         samplerates = (RadioGroup) findViewById(R.id.radioGroup);
@@ -60,9 +66,8 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
             gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
             gyroPresent = true;
         }
+
         samplerates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 //              Check which button is selected for sampling rate of sensor, normal is the default
@@ -83,6 +88,14 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
                 }
             }
         });
+
+
+        viewLogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MotionSensors.this, LogDisplay.class));
+            }
+        });
     }
 
 
@@ -90,16 +103,21 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
     public void onSensorChanged(SensorEvent sensorEvent) {
         Sensor sensor = sensorEvent.sensor;
         Instant instant = Instant.now();
+        recording = recordLogs.isChecked();
 //      Check if the changed sensor is the accelerometer or gyroscope and write values
         if (sensor.getType() == Sensor.TYPE_ACCELEROMETER){
-//            Helper.WriteToFile("Test");
-            Log.d(TAG, instant + " Accelerometer Value changed: X: " + sensorEvent.values[0] + " Y: " + sensorEvent.values[1] + " Z: " + sensorEvent.values[2]);
+            if(recording){
+//              if the switch for recording logs is ticked then call the log builder helper class
+                Helper.BuildLogs(instant, " Accelerometer Value changed: X: " + sensorEvent.values[0] + " Y: " + sensorEvent.values[1] + " Z: " + sensorEvent.values[2]);
+            }
             accelX.setText("xValues: " + sensorEvent.values[0]);
             accelY.setText("yValues: " + sensorEvent.values[1]);
             accelZ.setText("zValues: " + sensorEvent.values[2]);
         }
         else if (sensor.getType() == Sensor.TYPE_GYROSCOPE){
-            Log.d(TAG, instant + " Gyroscope Value changed: X: " + sensorEvent.values[0] + " Y: " + sensorEvent.values[1] + " Z: " + sensorEvent.values[2]);
+            if(recording) {
+                Helper.BuildLogs(instant, " Gyroscope Value changed: X: " + sensorEvent.values[0] + " Y: " + sensorEvent.values[1] + " Z: " + sensorEvent.values[2]);
+            }
             gyroX.setText("xValues: " + sensorEvent.values[0]);
             gyroY.setText("yValues: " + sensorEvent.values[1]);
             gyroZ.setText("zValues: " + sensorEvent.values[2]);
@@ -109,7 +127,6 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
-
     }
 
     @Override
@@ -122,17 +139,15 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
         if (gyroPresent){
             sensorManager.registerListener(this, gyroscope, chosenRate);
         }
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 //      On pause check if sensors are present and unregister listeners
-        if(accelPresent){
+        if (accelPresent) {
             sensorManager.unregisterListener(this);
-        }
-        else if (gyroPresent){
+        } else if (gyroPresent) {
             sensorManager.unregisterListener(this);
         }
 
