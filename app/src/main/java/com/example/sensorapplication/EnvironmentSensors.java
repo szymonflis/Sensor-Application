@@ -95,10 +95,10 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 int id = unitChange.getCheckedRadioButtonId();
                 switch(id){
-                    case R.id.radioButton12:
+                    case R.id.celsius:
                         fahrenheit = false;
                         break;
-                    case R.id.radioButton10:
+                    case R.id.fahr:
                         fahrenheit = true;
                         break;
 

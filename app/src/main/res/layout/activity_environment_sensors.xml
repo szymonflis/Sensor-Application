@@ -126,6 +126,7 @@
         android:layout_width="101dp"
         android:layout_height="55dp"
         android:orientation="horizontal"
+        android:checked="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.851"
@@ -134,13 +135,13 @@
         app:layout_constraintVertical_bias="0.272">
 
         <RadioButton
-            android:id="@+id/radioButton10"
+            android:id="@+id/fahr"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/fahrenheit" />
 
         <RadioButton
-            android:id="@+id/radioButton12"
+            android:id="@+id/celsius"
             android:layout_width="74dp"
             android:layout_height="55dp"
             android:layout_weight="1"
