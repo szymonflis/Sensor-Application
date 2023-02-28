@@ -40,6 +40,7 @@
         android:layout_width="167dp"
         android:layout_height="167dp"
         android:scaleType="fitXY"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
@@ -91,6 +92,7 @@
         android:layout_width="167dp"
         android:layout_height="167dp"
         android:scaleType="fitXY"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"
@@ -103,26 +105,28 @@
         android:id="@+id/imageButton2"
         android:layout_width="167dp"
         android:layout_height="167dp"
+        android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907"
+        app:layout_constraintVertical_bias="0.971"
         app:srcCompat="@mipmap/env_sensor_image" />
 
     <ImageButton
         android:id="@+id/imageButton4"
         android:layout_width="167dp"
         android:layout_height="167dp"
+        android:background="@android:color/transparent"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.907"
+        app:layout_constraintVertical_bias="0.971"
         app:srcCompat="@mipmap/user_manual_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

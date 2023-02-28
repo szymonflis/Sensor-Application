@@ -8,7 +8,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
 import android.os.Bundle;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 
 public class InternalSensors extends AppCompatActivity {
@@ -17,13 +20,12 @@ public class InternalSensors extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_internal_sensors);
-
    }
-
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            final RadioGroup unitChanges = findViewById(R.id.unitChange2);
             final TextView batteryTemp = findViewById(R.id.batTemp);
             final TextView batteryVolt = findViewById(R.id.batVolt);
             final TextView batteryLevel = findViewById(R.id.batPerc);
@@ -34,10 +36,30 @@ public class InternalSensors extends AppCompatActivity {
             BatteryHealthSet((intent.getIntExtra(BatteryManager.EXTRA_HEALTH, 0)));
             BatteryChargingSet(intent);
             batteryLevel.setText((intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0)) + "%" + "\n" + "Battery");
-            batteryTemp.setText("Battery Temperature: " + temperature + "°C");
             batteryVolt.setText("Voltage: " + voltage + "v");
+            batteryTemp.setText("Battery Temperature: " + temperature + "°C");
+
+//          Checking a default value on radio button to set temperature
+            unitChanges.check(R.id.celsius);
+            unitChanges.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    int id = unitChanges.getCheckedRadioButtonId();
+                    switch(id){
+                        case R.id.celsius:
+                            batteryTemp.setText("Battery Temperature: " + temperature + "°C");
+                            break;
+                        case R.id.fahr:
+                            DecimalFormat df = new DecimalFormat("#.##");
+                            df.setMaximumFractionDigits(2);
+                            batteryTemp.setText("Battery Temperature = " + df.format((temperature * 1.8 + 32)) + " °F");
+                            break;
+                    }
+                }
+            });
         }
     };
+
 
     @Override
     protected void onResume() {
@@ -86,10 +108,12 @@ public class InternalSensors extends AppCompatActivity {
         }
     }
 
-
     private void BatteryChargingSet(Intent intent){
         final TextView batStatus = findViewById(R.id.batStat);
         String status = "Status: ";
+//      A big switch statement which will check which status is currently happening
+
+
         switch(intent.getIntExtra(BatteryManager.EXTRA_STATUS, 0)){
             case BatteryManager.BATTERY_STATUS_CHARGING:
                 batStatus.setText(status + "Charging");
@@ -111,9 +135,5 @@ public class InternalSensors extends AppCompatActivity {
                 batStatus.setText(status + "Unknown");
                 break;
         }
-
-
-
     }
-
 }

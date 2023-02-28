@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_background"
     tools:context=".InternalSensors"
-    android:background="@drawable/main_background">
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
 
 
     <TextView
@@ -52,6 +54,7 @@
         android:id="@+id/batPerc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="#D80F53"
         android:textSize="48sp"
@@ -74,4 +77,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.712" />
+
+    <RadioGroup
+        android:id="@+id/unitChange2"
+        android:layout_width="104dp"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.609">
+
+        <RadioButton
+            android:id="@+id/fahr"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/fahrenheit"
+            tools:layout_editor_absoluteX="248dp"
+            tools:layout_editor_absoluteY="184dp" />
+
+        <RadioButton
+            android:id="@+id/celsius"
+            android:layout_width="74dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:text="@string/Celsius" />
+
+    </RadioGroup>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
