@@ -31,7 +31,8 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
         lightText = findViewById(R.id.textView10);
         samplerates = (RadioGroup) findViewById(R.id.radioGroup);
         unitChange = (RadioGroup) findViewById(R.id.radioGroup2);
-
+        unitChange.check(R.id.celsius);
+        samplerates.check(R.id.radioButton);
 
 //      Get the sensor manager to check if sensors are present before assigning them
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -68,7 +69,6 @@ public class EnvironmentSensors extends AppCompatActivity implements SensorEvent
             lightText.setText("Pressure Unavailable");
             lightPresent = false;
         }
-
         samplerates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {

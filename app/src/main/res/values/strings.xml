@@ -23,6 +23,7 @@
             \u25CF The bottom left icon takes the user to all environmental sensors displaying information around the phone like pressure and light \n\n
             \u25CF The top right icon directs the user to motion sensors which track the built in accelerometer and gyroscope as the phone changes physical position \n\n
             \u25CF The user is given the option to change the sampling rate from the built in rates in the android device for the motion sensors and environmental \n \n
+            \u25CF Sampling rate values are: \n Fastest - quickest possible \n Game - a rate suitable for games \n UI - suitable for user interface \n Normal - suitable for orientation changes
 
     </string>
 

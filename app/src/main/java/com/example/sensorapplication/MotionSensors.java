@@ -66,7 +66,7 @@ public class MotionSensors extends AppCompatActivity implements SensorEventListe
             gyroscope = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
             gyroPresent = true;
         }
-
+        samplerates.check(R.id.radioButton);
         samplerates.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
